@@ -31,4 +31,38 @@ window.Script17 = function()
 
 }
 
+window.Script18 = function()
+{
+  (function () {
+  var player = GetPlayer();
+  if (player.GetVar("ConfettiDone")) { 
+    return; // already done, skip
+  }
+  player.SetVar("ConfettiDone", true);
+
+  var cdn = "https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js";
+
+  function loadScript(src, done) {
+    var s = document.createElement("script");
+    s.src = src; s.async = true;
+    s.onload = done; s.onerror = done;
+    document.head.appendChild(s);
+  }
+
+  function party() {
+    var duration = 2000; // ms
+    var end = Date.now() + duration;
+
+    (function frame() {
+      confetti({ particleCount: 8, angle: 60, spread: 55, origin: { x: 0 } });
+      confetti({ particleCount: 8, angle: 120, spread: 55, origin: { x: 1 } });
+      if (Date.now() < end) requestAnimationFrame(frame);
+    })();
+  }
+
+  if (window.confetti) { party(); }
+  else { loadScript(cdn, party); }
+})();
+}
+
 };
