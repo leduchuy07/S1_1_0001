@@ -35,41 +35,6 @@
   </style>
 
   <script>
-     (function() {
-      // --- CONFIGURATION ---
-      // Add your app's domain(s) here. 
-      // Do NOT include "https://" or slashes.
-      const allowedDomains = [
-        'learnizza.com', // Replace with your actual domain
-        'localhost' // Good for local testing
-      ];
-
-      // The URL to redirect to if access is unauthorized.
-      const redirectUrl = 'https://learnizza.com/practice/english/starters-digital.html'; // Replace with your app's URL
-
-      // --- SCRIPT LOGIC (No need to edit below) ---
-      try {
-        const isFramed = window.self !== window.top;
-        const topHostname = window.top.location.hostname;
-
-        // Check 1: Is it accessed directly? (Not in an iframe)
-        // Check 2: Is it framed, but on an unauthorized domain?
-        if (!isFramed || !allowedDomains.includes(topHostname)) {
-          // Hide the content immediately to prevent flashing.
-          document.documentElement.style.visibility = 'hidden';
-          
-          // Redirect the top-level window to your main app.
-          window.top.location.replace(redirectUrl);
-        }
-      } catch (e) {
-        // This catch block can be triggered by cross-origin security policies
-        // if an unauthorized site tries something tricky. We'll treat it as a block.
-        console.error("Frame-guard security check failed:", e);
-        document.documentElement.style.visibility = 'hidden';
-        window.top.location.replace(redirectUrl);
-      }
-    })();
-    
     window.DS = {};
     window.globals = {
       DATA_PATH_BASE: '',
@@ -295,7 +260,6 @@
   .is-offline #nav-controls {
     pointer-events: all !important;
   }
-  html { visibility: hidden; }
 </style>
 
 <div class="warn-connection-dialog" role="alertdialog" aria-modal="true" tabindex="0" aria-labelledby="warn-connection-message">
@@ -531,7 +495,6 @@
   
 
   <link rel="stylesheet" href="html5/data/css/output.min.css" data-noprefix/>
-  document.documentElement.style.visibility = 'visible';
 </body>
 <script src="html5/lib/scripts/bootstrapper.min.js"></script>
 </html>
