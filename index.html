@@ -8,6 +8,27 @@
   <meta http-equiv="x-ua-compatible" content="IE=edge"/>
   <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui"/>
   <meta name="apple-mobile-web-app-capable" content="yes"/>
+  
+  <script>
+    (function() {
+      var allowedDomain = "learnizza.com";
+      var redirectUrl = "https://learnizza.com/practice/english/starters-digital.html";
+      try {
+        if (window.self === window.top) {
+          window.location.href = redirectUrl;
+          return;
+        }
+        var referrerHostname = new URL(document.referrer).hostname;
+        var isAllowed = (referrerHostname === allowedDomain) || referrerHostname.endsWith('.' + allowedDomain);
+        if (!isAllowed) {
+          window.location.href = redirectUrl;
+        }
+      } catch (e) {
+        window.location.href = redirectUrl;
+      }
+    })();
+  </script>
+  
   <style>
     html, body { height: 100%; padding: 0; margin: 0 }
     #app { height: 100%; width: 100%; }
